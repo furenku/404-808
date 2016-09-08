@@ -17,8 +17,8 @@ p = ProxySpace.push(s);
 //~out = { Pan2.ar( Limiter.ar( ~mix.ar * ~amp ), 0 )  };
 
 
-p.quant_(0);
-p.quant = (0);
+p.quant_(4);
+p.quant = (4);
 
 ~out.play;
 
