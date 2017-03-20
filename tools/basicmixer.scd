@@ -2,6 +2,7 @@ s.boot;
 
 ().play;
 
+
 (
 
 ~bpm = 160;
@@ -9,10 +10,12 @@ s.boot;
 p = ProxySpace.push(s);
 
 
+//TempoClock.default.tempo = ~bpm / 60;
+
 
 ~z = { Silent.ar ! 2 };
 ~mix = ~z;
-~amp = 0.95;
+~amp = 0.15;
 ~out = {var m=HPF.ar(~mix.ar,20);Pan2.ar(Limiter.ar(Compander.ar(m,m)*~amp),0);};
 //~out = { Pan2.ar( Limiter.ar( ~mix.ar * ~amp ), 0 )  };
 
@@ -22,13 +25,11 @@ p.quant = (4);
 
 ~out.play;
 
-TempoClock.default.tempo = ~bpm / 60;
 p.makeTempoClock( ~bpm / 60 );
+
 
 )
 
-~z = { WhiteNoise.ar(1/20) ! 2 };
+~z = { WhiteNoise.ar(1/10) ! 2 };
 ~z = { Silent.ar ! 2 };
 ~mix = ~z;
-
-
