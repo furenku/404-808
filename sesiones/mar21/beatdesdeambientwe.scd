@@ -1,17 +1,17 @@
 s.boot
-p = ProxySpace.push(s)
+p = ProxySpace.push(s);
+~p.quant_(4);
 (
 
 
 ~oscbazz1 = {
-   SinOsc.ar( (((2..7) * ((3..7)/20)) *0 Stepper.kr( Impulse.kr(1/[8,12]),0, 60 ,[180,420], 60 ) ) ) ! 2 / 15
+   SinOsc.ar( (((2..7) * ((3..7)/20)) * Stepper.kr( Impulse.kr(1/[8,12]),0, 60 ,[180,420], 60 ) ) ) ! 2 / 15
 };
 
 ~oscbazz2 = {
    SinOsc.ar( (((12..17) * ((3..7))) * Stepper.kr( Impulse.kr(1*[8,12]),0, 60 ,[180,420,960], 60 ) * [1,1/3]) ) ! 2 / 15
 };
 
-~p.quant_(4)
 ~y = {
    SinOsc.kr(1/[3,16],0,1,[0.1,2/3])
 };
@@ -22,6 +22,38 @@ p = ProxySpace.push(s)
 (
 
 )
+
+
+~oscbazz1 = {
+   SinOsc.ar( (((2..7) * ((3..7)/20)) * Stepper.kr( Impulse.kr(1/[8,12]),0, 60 ,[180,420], 60 ) ) ) ! 2 / 15
+};
+
+~oscbazz2 = {
+   SinOsc.ar( (((12..17) * ((3..7))) * Stepper.kr( Impulse.kr(1*[8,12]),0, 60 ,[180,420,960], 60 ) * [1,1/3]) ) ! 2 / 15
+};
+
+~y = {
+   SinOsc.kr(1/[3,16],0,1,[0.1,2/3])
+};
+
+
+
+
+
+~oscbazz1 = {
+   SinOsc.ar( (((2..7) * ((3..7)/20)) * Stepper.kr( Impulse.kr(1/[8,12]),0, 60 ,[180,420], 60 ) ) ) ! 2 / 15
+};
+
+~oscbazz2 = {
+   SinOsc.ar( (((12..17) * ((3..7))) * Stepper.kr( Impulse.kr(1*[8,12]),0, 60 ,[180,420,960], 60 ) * [1,1/3]) ) ! 2 / 15
+};
+
+~y = {
+   SinOsc.kr(1/[3,16],0,1,[0.1,2/3])
+};
+
+
+p.quant_(4)
 
 ~beat[0]= { ( Decay2.kr(Impulse.kr(1/[2,3,7]),0.01,0.1) * ~oscbazz1.ar * 800 ).tanh * 3 };
 ~beat[1]= { ( Decay2.kr(Impulse.kr(1*[2,3,7]),0.01,0.1) * ~oscbazz1.ar * 300 ).tanh };
@@ -34,7 +66,7 @@ p = ProxySpace.push(s)
 
 ~beat[7]= { ( Decay2.kr(Impulse.kr(2),0.01,0.7) * ~oscbazz1.ar * 2433 ).tanh * ~beat[0] };
 
-~beat[6]= \filter -> {|in| ( in ) / 2 };
+~beat[6]= \filter -> {|in| ( in ) / 1 };
 
 
 ~tk[0] = { Impulse.ar( 1*(2..9), 1/(3..7)) }
@@ -43,6 +75,8 @@ p = ProxySpace.push(s)
 ~x = ~oscbazz1 * ~y
 ~x = ~oscbazz1 * ~y + ~oscbazz2 * ~y
 ~x.stop
+
+~mix.play
 ~mix = ~x
 ~mix = ~x + ~tk
 ~mix = ~tk
